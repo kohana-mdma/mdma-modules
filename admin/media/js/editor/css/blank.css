@@ -1,0 +1,126 @@
+/**
+ * Styles for _edit work area_ of redactor. Reset and typography styles use frontend and backend both
+ */
+@import url("/css/reset.css");
+@import url("/css/typography.css");
+
+body{
+    padding:10px;
+}
+/*ul{
+    padding-left:0;
+}*/
+
+/* blocks */
+.model-block.id-footer{
+
+}
+
+/* /blocks */
+
+.l-col2{
+	margin-left:-30px;
+	margin-right:-30px;
+	padding:0 30px;
+}
+.l-col2:before, .l-col2:after, .l-col2_l:before, .l-col2_l:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
+.l-col2:after, .l-col2_l:after { clear: both; }
+.l-col2, .l-col2_l { zoom: 1; }
+.l-col2 .l-col-1,
+.l-col2 .l-col-2{
+	width:50%;
+	float:left;
+}
+.l-col2_l{
+	width:100%;
+}
+.l-col2_l .l-col-1{
+	width:66%;
+	float:left;
+}
+.l-col2_l .l-col-2{
+	width:33%;
+	float:right;
+}
+.l-col3:before, .l-col3:after{ content: "\0020"; display: block; height: 0; overflow: hidden; }
+.l-col3:after{ clear: both; }
+.l-col3 { zoom: 1; }
+.l-col3 .l-col-1,
+.l-col3 .l-col-2,
+.l-col3 .l-col-3{
+	float:left;
+}
+.l-col3 .l-col-1{
+	width:33.3%;
+}
+.l-col3 .l-col-2{
+	width:33.3%;
+}
+.l-col3 .l-col-3{
+	width:33.3%;
+}
+.withwave{
+	padding-bottom:50px;
+	background:url(../images/wave-blue.gif) repeat-x left bottom;
+	padding-left:30px;
+	padding-right:30px;
+	margin-left:-30px;
+	margin-right:-30px;
+	margin-bottom:30px;
+}
+
+.l-col-full{
+	width:100%;
+	clear:both;
+}
+
+.photogallery-list{
+	margin:0 0 20px;
+	list-style:none;
+}
+.photogallery-list:before, .photogallery-list:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
+.photogallery-list:after { clear: both; }
+.photogallery-list{ zoom: 1; }
+.photogallery-list li{
+	float:left;
+	margin:0 12px 10px -4px;
+	padding:0;
+	background-image:none;
+}
+.photogallery-list li img{
+	display:block;
+}
+.photogallery-list a{
+	border:2px solid #DBDBDB;
+	margin:2px;
+	display:block;
+	position:relative;
+}
+.photogallery-list a:hover{
+	border:4px solid #A2C7A9;
+	margin:0;
+}
+.photogallery-list a i{
+	display:block;
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+}
+.photogallery-list a:hover i{
+	background:url(../images/photogallery-a.png) no-repeat center center;
+}
+.photogallery-list li.photogallery-list-more{
+	width:180px;
+	margin:0;
+	padding-top:35px;
+}
+.photogallery-list li.photogallery-list-more a,
+.photogallery-list li.photogallery-list-more a:hover{
+	display:inline;
+	border:0;
+	margin:0;
+	font-size:13px;
+	line-height:14px;
+}

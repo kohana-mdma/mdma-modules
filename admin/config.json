@@ -1,0 +1,83 @@
+{"tree":{
+    "default":{
+        //default default type
+        "node":{
+            "icon":"url of image",
+            //"valid_children" : "default",
+            //"start_drag" : false,
+            //"delete_node" : false,
+            //"remove" : false,
+            //"close_node" : false
+            "contextmenu":{
+                "create" : {
+                    "label" : "Создать подстраницу",
+                    "action" : "createNode"
+                },
+                "rename" : {
+                    "label" : "Переименовать",
+                    "action" : "this.rename"
+                },
+                "remove" : {
+                    "label" : "Удалить",
+                    "action" : "this.remove"
+                }
+            }
+        },
+        //other default types
+        "root":{
+            "max_children":"-2",
+            "max_depth":"-2",
+            "valid_children":"all",
+            "icon":"url of image"
+        },
+        "leaf":{
+            "max_children":"0",
+            "max_depth":"0",
+            "valid_children":"none",
+            "icon":"url of image"
+        }
+    },
+    //config for page module
+    "page":{
+        //default type
+        "node":{
+            "icon":"url of image",
+            //"valid_children" : "default",
+            //"start_drag" : false,
+            //"delete_node" : false,
+            //"remove" : false,
+            //"close_node" : false
+        },
+        "root":{
+            "max_children":"-2",
+            "max_depth":"-2",
+            "valid_children":"all",
+            "icon":"url of image"
+        },
+        "leaf":{
+            "icon":"url of image"
+        }
+    },
+    //config for stages module
+    "stage":{
+        "node":{
+            "icon":"url of image",
+            "valid_children" : "none",
+            "contextmenu":{
+                "rename" : {
+                    "label" : "Переименовать",
+                    "action" : "this.rename"
+                }
+            }
+        },
+        "root":{
+            "valid_children":"stage.leaf",
+            "icon":"url of image"
+        },
+        "leaf":{
+            "icon":"url of image",
+            "delete_node" : "tree",
+            "valid_children" : "none"
+        }
+    }
+}}

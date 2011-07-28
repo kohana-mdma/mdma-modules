@@ -1,0 +1,21 @@
+/**
+ * Styles for edit toolbars, icons and other of wysiwyg
+ */
+/* my question button */
+body .imp_editor_toolbar li a.imp_btn_question {background:url(../i/question-icon.png) no-repeat left top;}
+body .imp_editor_toolbar li a.imp_li_btn_term { background-position: -672px; }
+body .imp_editor_toolbar li a.imp_btn_typo {background:url(../i/typo-icon.png) no-repeat left top;}
+#redactorInsertQuestionForm input{
+    width:100%;
+}
+#redactorInsertQuestionForm textarea{
+    width:100%;
+    height:50px !important;
+}
+#redactorInsertQuestionForm table{
+    border:0;
+    background-color:transparent;
+}
+#redactorInsertQuestionForm td{
+    padding:2px;
+}
