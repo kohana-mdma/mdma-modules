@@ -5,7 +5,7 @@ class MDMA_Weather {
 		$result = Cache::instance()->get('weather');
 		if( ! $result and implode(':', Arr::get($result, 'date', array())) !== Date::formatted_time('now', 'j:n:Y', 'Asia/Vladivostok'))
 		{
-			$result = (array) simplexml_load_file('http://export.yandex.ru/weather/?city='.Kohana::config('weather.'.$city));
+			$result = (array) simplexml_load_file('http://export.yandex.ru/weather/?city='.Kohana::$config->load('weather.'.$city));
 			$result['date'] = (array)$result['date'];
 			Cache::instance()->set('weather', $result, Date::HOUR * 4);
 		}

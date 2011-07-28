@@ -15,7 +15,7 @@ abstract class Controller_Admin_Template extends Controller_Template {
 		}
 		else
         {
-			$top_menu = Kohana::config('admin.top_menu');
+			$top_menu = Kohana::$config->load('admin.top_menu');
 			uasort($top_menu, function ($a, $b){return strnatcmp(Arr::get($a, 'sort', 0), Arr::get($b, 'sort', 0))*(-1);});
 			$this->template->top_menu = $top_menu;
             $this->template->sidebar = array();

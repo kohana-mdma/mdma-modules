@@ -194,7 +194,8 @@ class Kohana_Controller_Admin_Crud extends Controller_Admin_Template {
 				->set('data',$_POST);
 	}
 
-	public function action_delete(){
+	public function action_delete()
+	{
 		$id = $this->request->param('id');
 		$item = ORM::factory($this->_model, $id);
 		try

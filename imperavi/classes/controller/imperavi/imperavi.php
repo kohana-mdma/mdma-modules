@@ -9,9 +9,9 @@ class Controller_Imperavi_Imperavi extends Controller {
 		{
 			$ext = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
 			if(Upload::type($_FILES['file'],array('jpg','gif','png'))){
-				$file_name = Kohana::config('imperavi.'.$this->config.'.images_path');
+				$file_name = Kohana::$config->load('imperavi.'.$this->config.'.images_path');
 			}else{
-				$file_name = Kohana::config('imperavi.'.$this->config.'.files_path');
+				$file_name = Kohana::$config->load('imperavi.'.$this->config.'.files_path');
 			}
 			$file_name = str_replace($file_name, '', Upload::save($_FILES['file'], NULL, $file_name, 777));
 
@@ -22,11 +22,11 @@ class Controller_Imperavi_Imperavi extends Controller {
 	}
 
 	public function action_delete($file = NULL){
-		unlink(Kohana::config('imperavi.'.$this->config.'.file_path').$file);
+		unlink(Kohana::$config->load('imperavi.'.$this->config.'.file_path').$file);
 	}
 
 	public function action_download($file = NULL){
-		Download::force($file,file_get_contents(Kohana::config('imperavi.'.$this->config.'.file_path').$file));
+		Download::force($file,file_get_contents(Kohana::$config->load('imperavi.'.$this->config.'.file_path').$file));
 	}
 
 	public function action_typo(){

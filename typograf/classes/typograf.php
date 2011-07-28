@@ -25,7 +25,7 @@ abstract class Typograf
 			return Typograf::$instances[$group];
 		}
 
-		$config = Kohana::config('typograf');
+		$config = Kohana::$config->load('typograf');
 
 		if ( ! $config->offsetExists($group))
 		{

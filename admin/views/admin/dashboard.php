@@ -1,7 +1,7 @@
 <h1>Главная панель</h1>
 <p>Добро пожаловать в административную панель!</p>
 
-<? $icons = Kohana::config('admin.dashbord');?>
+<? $icons = Kohana::$config->load('admin.dashbord');?>
 <? if($icons):?>
 <h2>Быстрые кнопки</h2>
 <section class="icons">

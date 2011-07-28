@@ -12,7 +12,7 @@ class Controller_Admin_Widget extends Controller_Admin_Template {
 	public function action_update()
 	{
 		$all_widget =ORM::factory('admin_widget')->find_all()->as_array('title');
-		$widgets = Kohana::config('admin.widget');
+		$widgets = Kohana::$config->load('admin.widget');
 		$error = array();
 		if($widgets){
 			uasort($widgets, function ($a, $b){return strnatcmp(Arr::get($a, 'sort', 0), Arr::get($b, 'sort', 0));});

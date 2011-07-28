@@ -9,14 +9,16 @@ class Controller_Admin_User extends Controller_Admin_Template {
 	    $this->template->content = View::factory('admin/user/list')->bind('users',$users);
 	}
 
-	public function action_show($id)
+	public function action_show()
 	{
+		$id = $this->request->param('id');
         $user = ORM::factory('user', $id);
 	    $this->template->content = View::factory('admin/user/show')->bind('user',$user);
 	}
 
-	public function action_edit($id)
+	public function action_edit()
 	{
+		$id = $this->request->param('id');
 	    $this->template->content = View::factory('admin/user/form');
 	    if ($_POST)
 	    {
@@ -68,7 +70,9 @@ class Controller_Admin_User extends Controller_Admin_Template {
 	    $this->template->content = View::factory('admin/user/form')->set('data',$_POST);
 	}
 
-	public function action_delete($id){
+	public function action_delete()
+	{
+		$id = $this->request->param('id');
 		$user = ORM::factory('user',$id);
 		try
 		{

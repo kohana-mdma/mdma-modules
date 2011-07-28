@@ -45,8 +45,9 @@ class Controller_Admin_Page extends Controller_Admin_Template {
 				->set('data', $_POST);
 	}
 
-	public function action_edit($id)
+	public function action_edit()
 	{
+		$id = $this->request->param('id');
 		$version = $this->request->param('version');
 
 		$item = ORM::factory($this->_model, $id);

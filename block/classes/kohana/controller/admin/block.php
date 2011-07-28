@@ -9,8 +9,9 @@ class Kohana_Controller_Admin_Block extends Controller_Admin_Template {
 	    $this->template->content = View::factory('admin/block/list')->bind('blocks',$blocks);
 	}
 
-	public function action_edit($id)
+	public function action_edit()
 	{
+		$id = $this->request->param('id');
 		$this->ajaxAllow = TRUE;
 		$version = $this->request->param('version');
 
@@ -90,7 +91,9 @@ class Kohana_Controller_Admin_Block extends Controller_Admin_Template {
 	    $this->template->content = View::factory('admin/block/form')->set('data',$_POST);
 	}
 
-	public function action_delete($id){
+	public function action_delete()
+	{
+		$id = $this->request->param('id');
 		$block = ORM::factory('block', $id);
 		try
 		{
