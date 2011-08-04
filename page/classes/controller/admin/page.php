@@ -91,7 +91,7 @@ class Controller_Admin_Page extends Controller_Admin_Template {
 			try
 			{
 				$item->save();
-				if($item->saved()){
+				if($item->check()){
 					$node->title = Arr::path($_POST, $this->_model.'.title');
 					$node->name = Arr::path($_POST, 'node.name');
 					if(arr::path($_POST, 'node.folder', 0))$node->type = 'folder';

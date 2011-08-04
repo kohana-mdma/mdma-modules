@@ -79,7 +79,7 @@
             <div class="box menu">
                 <h2>Страницы</h2>
                 <section>
-                <?
+                <?php
 				$nodes = ORM::factory('node')->load_tree();
 				$render = function ($nodes, $render) {
 					$result = "";
