@@ -18,6 +18,7 @@ class Model_Node extends ORM_MP {
 			$old_position = $this->position;
 
 			if( ! $this->name) $this->name = $this->title;
+			if( ! $this->menu_title) $this->menu_title = $this->title;
 			$this->name = URL::title($this->name);
 		}
 
@@ -43,6 +44,7 @@ class Model_Node extends ORM_MP {
 
 	public function insert ($target = null, Validation $validation= NULL) {
 		if( ! $this->name) $this->name = URL::title($this->title);
+		if( ! $this->menu_title) $this->menu_title = $this->title;
 		return parent::insert($target, $validation);
 	}
 

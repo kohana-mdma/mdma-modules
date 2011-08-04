@@ -5,8 +5,17 @@
 <?php endif;?>
 <form action="<?= Request::current()->url(); ?>" method="post" accept-charset="utf-8" class="uniform">
 <dl>
-    <dt><label for="page-title">Название</label></dt>
+    <dt><label for="page-title">Название:</label></dt>
     <dd><input id="page-title" type="text" name="page[title]" value="<?= Arr::path($data, 'page.title'); ?>" /></dd>
+
+	<dt><label for="page-body">Текст:</label></dt>
+    <dd><textarea name="page[body]" id="page-body" class="big editor" rows="15"><?= Arr::path($data, 'page.body'); ?></textarea></dd>
+
+	<dt><label for="node-title">Заголовок окна:</label></dt>
+    <dd><input id="node-title" type="text" name="node[title]" value="<?= Arr::path($data, 'node.title'); ?>" /></dd>
+
+	<dt><label for="node-menu_title">Название пункта меню:</label></dt>
+    <dd><input id="node-menu_title" type="text" name="page[menu_title]" value="<?= Arr::path($data, 'node.menu_title'); ?>" /></dd>
 
 	<dt><label for="node-name">Псевдоним (название в URL; латиница, без пробелов и спецсимволов):</label></dt>
     <dd><input id="node-name" type="text" name="node[name]" value="<?= Arr::path($data, 'node.name'); ?>" /></dd>
@@ -16,9 +25,6 @@
 
 	<dt><label for="page-description">Описание:</label></dt>
     <dd><input id="page-description" type="text" name="page[description]" value="<?= Arr::path($data, 'page.description'); ?>" /></dd>
-
-	<dt><label for="page-body">Текст:</label></dt>
-    <dd><textarea name="page[body]" id="page-body" class="big editor" rows="15"><?= Arr::path($data, 'page.body'); ?></textarea></dd>
 </dl>
 <p>
     <?php if( ! isset($version)):?>
