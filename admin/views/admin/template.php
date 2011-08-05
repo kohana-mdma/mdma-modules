@@ -92,7 +92,7 @@
 						}elseif($node->model_id){
 							$link = 'admin/'.$node->model.'/edit/'.$node->model_id;
 						}
-						$result  .= '<li id="node_'.$node->id.'" rel="'.$node->model.'.'.$node->type.'">'.HTML::anchor($link, $node->title).$render($node, $render).'</li>';
+						$result  .= '<li id="node_'.$node->id.'" rel="'.$node->model.'.'.$node->type.'">'.HTML::anchor($link, $node->menu_title).$render($node, $render).'</li>';
 					}
 					if($result) $result = '<ul>'.$result.'</ul>';
 					return $result;

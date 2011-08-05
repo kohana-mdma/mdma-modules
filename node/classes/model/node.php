@@ -8,17 +8,20 @@ class Model_Node extends ORM_MP {
 				array('URL::title', array(':value')),
 				array(array($this, 'generation_unique_name'), array(':value'))
 			),
+			'keywords' => array(
+				array(array($this, 'unique_keywords'), array(':value'))
+			),
 		);
 	}
 	
 	public function update (Validation $validation = NULL) {
+		if( ! $this->name) $this->name = $this->title;
+		if( ! $this->menu_title) $this->menu_title = $this->title;
+		
 		if(Arr::get($this->_changed, 'name') or Arr::get($this->_changed, 'position') ){
 			$old = ORM::factory($this->_object_name, $this->pk());
 			$old_name= $old->name;
 			$old_position = $this->position;
-
-			if( ! $this->name) $this->name = $this->title;
-			if( ! $this->menu_title) $this->menu_title = $this->title;
 			$this->name = URL::title($this->name);
 		}
 
@@ -113,5 +116,9 @@ class Model_Node extends ORM_MP {
 	public function load_node($model, $id){
 		$this->where('model','=',$model)->where('model_id','=',$id);
 		return $this;
+	}
+	
+	public function unique_keywords($keywords){
+		return implode(', ', array_unique(array_map('UTF8::trim', explode(',', $keywords))));
 	}
 }

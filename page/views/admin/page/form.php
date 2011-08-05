@@ -18,13 +18,13 @@
     <dd><input id="node-menu_title" type="text" name="page[menu_title]" value="<?= Arr::path($data, 'node.menu_title'); ?>" /></dd>
 
 	<dt><label for="node-name">Псевдоним (название в URL; латиница, без пробелов и спецсимволов):</label></dt>
-    <dd><input id="node-name" type="text" name="node[name]" value="<?= Arr::path($data, 'node.name'); ?>" /></dd>
+    <dd><?=Form::input('node[name]', Arr::path($data, 'node.name'), array('id'=>'node-name'));?></dd>
     
-	<dt><label for="page-keywords">Ключевые слова:</label></dt>
-    <dd><input id="page-keywords" type="text" name="page[keywords]" value="<?= Arr::path($data, 'page.keywords'); ?>" /></dd>
+	<dt><?=Form::label('node-keywords', 'Ключевые слова:');?></dt>
+    <dd><?=Form::textarea('node[keywords]', Arr::path($data, 'node.keywords'), array('id'=>'node-keywords'));?></dd>
 
-	<dt><label for="page-description">Описание:</label></dt>
-    <dd><input id="page-description" type="text" name="page[description]" value="<?= Arr::path($data, 'page.description'); ?>" /></dd>
+	<dt><label for="node-description">Описание:</label></dt>
+    <dd><?=Form::textarea('node[description]', Arr::path($data, 'node.description'), array('id'=>'node-description'));?></dd>
 </dl>
 <p>
     <?php if( ! isset($version)):?>

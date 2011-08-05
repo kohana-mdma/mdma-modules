@@ -2,15 +2,11 @@
 
 class Model_Page extends ORM_Versioned {
 
-	public function filters(){
+	public function rules() {
 		return array(
-			'keywords' => array(
-				array(array($this, 'unique_keywords'), array(':value'))
+			'title' => array(
+				array('not_empty'),
 			),
 		);
-	}
-
-	public function unique_keywords($keywords){
-		return implode(', ', array_unique(array_map('UTF8::trim', explode(',', $keywords))));
 	}
 }
