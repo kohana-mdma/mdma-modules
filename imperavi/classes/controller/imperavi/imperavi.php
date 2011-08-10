@@ -17,7 +17,8 @@ class Controller_Imperavi_Imperavi extends Controller {
 
 			$file_ico = $this->get_ico($ext);
 
-			$this->response->body('<a href="javascript:void(null);" rel="'.$file_name.'" class="editor_file_link editor_file_ico_'.$file_ico.'">'.$file_name.'</a>');
+			//$this->response->body('<a href="javascript:void(null);" rel="'.$file_name.'" class="editor_file_link editor_file_ico_'.$file_ico.'">'.$file_name.'</a>');
+			$this->response->body(URL::site($file_url.$file_name));
 		}
 	}
 
