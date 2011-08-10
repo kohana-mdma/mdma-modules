@@ -35,7 +35,7 @@
 <div id="login" class="box">
     <h2>Авторизация</h2>
     <section>
-        <?php echo Message::display();?>
+        <?php echo Message::render();?>
         <?=form::open('admin/auth/login')?>
         <dl>
             <dt><label for="username">Пользователь</label></dt>

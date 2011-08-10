@@ -31,12 +31,12 @@ class Controller_Admin_User extends Controller_Admin_Template {
 				$user_array = $user->as_array();
 				$user->remove('roles')->add('roles', Arr::get($_POST, 'roles', array()));
 				$user_array['roles'] = $user->roles->find_all()->as_array('id', 'id');
-				Message::success('Изменения прошли удачно');
+				Message::set(Message::SUCCESS, 'Изменения прошли удачно');
 				$this->template->content->data = $user_array;
 			}
 			catch (ORM_Validation_Exception $e)
 			{
-				Message::error($e->errors('user'));
+				Message::set(Message::ERROR, $e->errors('user'));
 				$this->template->content->data = $_POST;
 			}
 	    }
@@ -59,12 +59,12 @@ class Controller_Admin_User extends Controller_Admin_Template {
 			{
 				$user->save();
 				$user->add('roles', Arr::get($_POST, 'roles', array()));
-				Message::success('Добовление прошло успешно');
+				Message::set(Message::SUCCESS, 'Добовление прошло успешно');
 				$this->request->redirect('admin/user/edit/'.$user->id);
 			}
 			catch (ORM_Validation_Exception $e)
 			{
-				Message::error($e->errors('user'));
+				Message::set(Message::ERROR, $e->errors('user'));
 			}
 	    }
 	    $this->template->content = View::factory('admin/user/form')->set('data',$_POST);
@@ -77,12 +77,12 @@ class Controller_Admin_User extends Controller_Admin_Template {
 		try
 		{
 			$user->remove('roles')->delete();
-		    Message::success('Удаление прошло успешно');
+		    Message::set(Message::SUCCESS, 'Удаление прошло успешно');
 		    if( ! $this->request->is_ajax())$this->request->redirect('admin/user/');
 		}
 		catch (ORM_Validation_Exception $e)
 		{
-		    Message::error($e->errors('user'));
+		    Message::set(Message::ERROR, $e->errors('user'));
 			if( ! $this->request->is_ajax())$this->request->redirect('admin/user/');
 		}
 	}

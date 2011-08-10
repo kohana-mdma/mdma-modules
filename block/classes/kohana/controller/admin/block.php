@@ -31,12 +31,12 @@ class Kohana_Controller_Admin_Block extends Controller_Admin_Template {
 				try
 				{
 					$block->restore($version);
-					Message::success('Востановление версии прошло успешно');
+					Message::set(Message::SUCCESS, 'Востановление версии прошло успешно');
 					$this->request->redirect('admin/block/edit/'.$block->id);
 				}
 				catch (ORM_Validation_Exception $e)
 				{
-					Message::error($e->errors('block'));
+					Message::set(Message::ERROR, $e->errors('block'));
 					$this->request->redirect('admin/block/edit/'.$block->id.'/version/'.$version);
 				}
 			}
@@ -50,7 +50,7 @@ class Kohana_Controller_Admin_Block extends Controller_Admin_Template {
 				try
 				{
 					$block->save();
-					Message::success('Изменения прошли удачно');
+					Message::set(Message::SUCCESS, 'Изменения прошли удачно');
 					if( ! $this->request->is_ajax()){
 						$this->request->redirect('admin/block/edit/'.$block->id);
 					}
@@ -59,7 +59,7 @@ class Kohana_Controller_Admin_Block extends Controller_Admin_Template {
 				}
 				catch (ORM_Validation_Exception $e)
 				{
-					Message::error($e->errors('block'));
+					Message::set(Message::ERROR, $e->errors('block'));
 					$this->template->content->data = $_POST;
 				}
 			}
@@ -80,12 +80,12 @@ class Kohana_Controller_Admin_Block extends Controller_Admin_Template {
 			try
 			{
 				$block->save();
-				Message::success('Добовление прошло успешно');
+				Message::set(Message::SUCCESS, 'Добовление прошло успешно');
 				$this->request->redirect('admin/block/edit/'.$block->id);
 			}
 			catch (ORM_Validation_Exception $e)
 			{
-				Message::error($e->errors('block'));
+				Message::set(Message::ERROR, $e->errors('block'));
 			}
 	    }
 	    $this->template->content = View::factory('admin/block/form')->set('data',$_POST);
@@ -98,12 +98,12 @@ class Kohana_Controller_Admin_Block extends Controller_Admin_Template {
 		try
 		{
 		    $block->delete();
-		    Message::success('Удаление прошло успешно');
+		    Message::set(Message::SUCCESS, 'Удаление прошло успешно');
 		    if( ! $this->request->is_ajax())$this->request->redirect('admin/block/');
 		}
 		catch (ORM_Validation_Exception $e)
 		{
-		    Message::error($e->errors('block'));
+		    Message::set(Message::ERROR, $e->errors('block'));
 			if( ! $this->request->is_ajax())$this->request->redirect('admin/block/');
 		}
 	}

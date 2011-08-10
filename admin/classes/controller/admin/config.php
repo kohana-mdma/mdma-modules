@@ -5,7 +5,7 @@ class Controller_Admin_Config extends Controller_Admin_Template {
 	public function action_index()
 	{
 		if(isset($_POST['config'])){
-			Message::success("Конфигурация обновленна.");
+			Message::set(Message::SUCCESS, "Конфигурация обновленна.");
 			foreach($_POST['config'] as $key=>$value){
 				Kohana::$config->_write_config('site', strtr($key, '_','.'), $value);
 			}		

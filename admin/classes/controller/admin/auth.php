@@ -38,12 +38,12 @@ class Controller_Admin_Auth extends Controller_Template {
                                 }
                                 else
                                 {
-                                    Message::error('Неверный логин или пароль.');
+                                    Message::set(Message::ERROR, 'Неверный логин или пароль.');
                                 }
                             }
                             else
                             {
-                                Message::error('Вы не указали логин или пароль.');
+                                Message::set(Message::ERROR, 'Вы не указали логин или пароль.');
                             }
 			}
 

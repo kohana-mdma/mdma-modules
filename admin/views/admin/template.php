@@ -70,7 +70,7 @@
     <section class="container_12 clearfix">
         <section id="main" class="grid_9 push_3">
             <article>
-                <?php echo Message::display(); ?>
+                <?php echo Message::render(); ?>
                 <?php echo $content; ?>
             </article>
         </section>

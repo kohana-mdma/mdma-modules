@@ -25,7 +25,7 @@ class Controller_Admin_Page extends Controller_Admin_Template {
 					$node->insert($this->request->param('node'));
 				}
 
-				Message::success('Добовление прошло успешно');
+				Message::set(Message::SUCCESS, 'Добовление прошло успешно');
 				if($this->request->is_ajax()){
 					$this->response->body(json_encode(Message::get()));
 					return ;
@@ -35,7 +35,7 @@ class Controller_Admin_Page extends Controller_Admin_Template {
 			}
 			catch (ORM_Validation_Exception $e)
 			{
-				Message::error(Arr::flatten($e->errors($this->_model)));
+				Message::set(Message::ERROR, Arr::flatten($e->errors($this->_model)));
 				if($this->request->is_ajax()){
 					$this->response->body(json_encode(Message::get()));
 					return ;
@@ -79,12 +79,12 @@ class Controller_Admin_Page extends Controller_Admin_Template {
 				try
 				{
 					$item->restore($version);
-					Message::success('Востановление версии прошло успешно');
+					Message::set(Message::SUCCESS, 'Востановление версии прошло успешно');
 					$this->request->redirect('admin/'.$this->_model.'/edit/'.$item->id);
 				}
 				catch (ORM_Validation_Exception $e)
 				{
-					Message::error(Arr::flatten($e->errors($this->_model)));
+					Message::set(Message::ERROR, Arr::flatten($e->errors($this->_model)));
 					$this->request->redirect('admin/'.$this->_model.'/edit/'.$item->id.'/version/'.$version);
 				}
 			}
@@ -101,12 +101,12 @@ class Controller_Admin_Page extends Controller_Admin_Template {
 					if(arr::path($_POST, 'node.folder', 0))$node->type = 'folder';
 					$node->save();
 				}
-				Message::success('Изменения прошли успешно');
+				Message::set(Message::SUCCESS, 'Изменения прошли успешно');
 				$this->request->redirect('admin/'.$this->_model.'/edit/'.$item->pk());
 			}
 			catch (ORM_Validation_Exception $e)
 			{
-				Message::error(Arr::flatten($e->errors('node'), $e->errors($this->_model)));
+				Message::set(Message::ERROR, Arr::flatten($e->errors('node'), $e->errors($this->_model)));
 				$this->template->content->data = $_POST;
 			}
 		}

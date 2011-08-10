@@ -98,12 +98,12 @@ class Kohana_Controller_Admin_Crud extends Controller_Admin_Template {
 				try
 				{
 					$item->restore($version);
-					Message::success('Востановление версии прошло успешно');
+					Message::set(Message::SUCCESS, 'Востановление версии прошло успешно');
 					$this->request->redirect('admin/'.$this->_name.'/edit/'.$item->id);
 				}
 				catch (ORM_Validation_Exception $e)
 				{
-					Message::error(Arr::flatten($e->errors($this->_model)));
+					Message::set(Message::ERROR, Arr::flatten($e->errors($this->_model)));
 					$this->request->redirect('admin/'.$this->_name.'/edit/'.$item->id.'/version/'.$version);
 				}
 			}
@@ -138,12 +138,12 @@ class Kohana_Controller_Admin_Crud extends Controller_Admin_Template {
 					}
 				}
 				$this->after_save($item);
-				Message::success('Изменения прошли успешно');
+				Message::set(Message::SUCCESS, 'Изменения прошли успешно');
 				$this->request->redirect('admin/'.$this->_name.'/edit/'.$item->id);
 			}
 			catch (ORM_Validation_Exception $e)
 			{
-				Message::error(Arr::flatten($e->errors($this->_model)));
+				Message::set(Message::ERROR, Arr::flatten($e->errors($this->_model)));
 				$this->template->content->data = $_POST;
 			}
 		}
@@ -180,12 +180,12 @@ class Kohana_Controller_Admin_Crud extends Controller_Admin_Template {
 
 				}
 				$this->after_save($item);
-				Message::success('Добовление прошло успешно');
+				Message::set(Message::SUCCESS, 'Добовление прошло успешно');
 				$this->request->redirect('admin/'.$this->_name.'/edit/'.$item->id);
 			}
 			catch (ORM_Validation_Exception $e)
 			{
-				Message::error(Arr::flatten($e->errors($this->_model)));
+				Message::set(Message::ERROR, Arr::flatten($e->errors($this->_model)));
 			}
 	    }
 	    $this->template->content = View::factory($this->view_path('form'))
@@ -203,12 +203,12 @@ class Kohana_Controller_Admin_Crud extends Controller_Admin_Template {
 			$this->before_delete($item);
 		    $item->delete();
 			$this->after_delete($item);
-		    Message::success('Удаление прошло успешно');
+		    Message::set(Message::SUCCESS, 'Удаление прошло успешно');
 		    if( ! $this->request->is_ajax())$this->request->redirect($this->request->referrer());
 		}
 		catch (ORM_Validation_Exception $e)
 		{
-		    Message::error($e->errors($this->_model));
+		    Message::set(Message::ERROR, $e->errors($this->_model));
 			if( ! $this->request->is_ajax())$this->request->redirect($this->request->referrer());
 		}
 	}

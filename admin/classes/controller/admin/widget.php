@@ -39,7 +39,7 @@ class Controller_Admin_Widget extends Controller_Admin_Template {
 		foreach($all_widget as $widget){
 			$widget->delete();
 		}
-		Message::error($error);
+		Message::set(Message::ERROR, $error);
 		$this->request->redirect('admin/widget');
     }
 
@@ -50,11 +50,11 @@ class Controller_Admin_Widget extends Controller_Admin_Template {
 		$widget->save();
 		if($widget->enable == 1)
 		{
-			Message::success('Модуль включен');
+			Message::set(Message::SUCCESS, 'Модуль включен');
 		}
 		else
 		{
-			Message::success('Модуль отключен');
+			Message::set(Message::SUCCESS, 'Модуль отключен');
 		}
 		$this->request->redirect('admin/widget');
 	}
