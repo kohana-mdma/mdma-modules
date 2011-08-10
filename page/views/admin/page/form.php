@@ -15,7 +15,7 @@
     <dd><input id="node-title" type="text" name="node[title]" value="<?= Arr::path($data, 'node.title'); ?>" /></dd>
 
 	<dt><label for="node-menu_title">Название пункта меню:</label></dt>
-    <dd><input id="node-menu_title" type="text" name="page[menu_title]" value="<?= Arr::path($data, 'node.menu_title'); ?>" /></dd>
+    <dd><input id="node-menu_title" type="text" name="node[menu_title]" value="<?= Arr::path($data, 'node.menu_title'); ?>" /></dd>
 
 	<dt><label for="node-name">Псевдоним (название в URL; латиница, без пробелов и спецсимволов):</label></dt>
     <dd><?=Form::input('node[name]', Arr::path($data, 'node.name'), array('id'=>'node-name'));?></dd>
