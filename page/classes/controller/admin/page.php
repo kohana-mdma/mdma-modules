@@ -13,11 +13,9 @@ class Controller_Admin_Page extends Controller_Admin_Template {
 			{
 				$item->save();
 				if($item->check()){
-					$node = ORM::factory('node');
+					$node = ORM::factory('node')->values($_POST['node']);
 					$node_title = Arr::path($_POST, 'node.title');
 					$node->title = ($node_title)?$node_title:Arr::path($_POST, $this->_model.'.title');
-					$node->menu_title = Arr::path($_POST, 'node.menu_title');
-					$node->name = Arr::path($_POST, 'node.name');
 					$node->request = 'page/'.$item->pk();
 					$node->model = 'page';
 					$node->model_id = $item->pk();
@@ -94,10 +92,9 @@ class Controller_Admin_Page extends Controller_Admin_Template {
 			{
 				$item->save();
 				if($item->check()){
+					$node->values($_POST['node']);
 					$node_title = Arr::path($_POST, 'node.title');
 					$node->title = ($node_title)?$node_title:Arr::path($_POST, $this->_model.'.title');
-					$node->name = Arr::path($_POST, 'node.name');
-					$node->menu_title = Arr::path($_POST, $this->_model.'.menu_title');
 					if(arr::path($_POST, 'node.folder', 0))$node->type = 'folder';
 					$node->save();
 				}

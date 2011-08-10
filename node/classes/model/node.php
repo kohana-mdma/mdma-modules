@@ -4,11 +4,21 @@ class Model_Node extends ORM_MP {
 
 	public function filters(){
 		return array(
+			'title' => array(
+				array('HTML::entities', array(':value')),
+			),
+			'menu_title' => array(
+				array('HTML::entities', array(':value')),
+			),
 			'name' => array(
 				array('URL::title', array(':value')),
 				array(array($this, 'generation_unique_name'), array(':value'))
 			),
+			'description' => array(
+				array('HTML::entities', array(':value')),
+			),
 			'keywords' => array(
+				array('HTML::entities', array(':value')),
 				array(array($this, 'unique_keywords'), array(':value'))
 			),
 		);

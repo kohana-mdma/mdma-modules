@@ -10,14 +10,4 @@ class Model_Page extends ORM_Versioned {
 		);
 	}
 	
-	public function filters(){
-		return array(
-			'keywords' => array(
-				array('HTML::chars', array(':value')),
-			),
-			'description' => array(
-				array('HTML::chars', array(':value')),
-			),
-		);
-	}
 }
