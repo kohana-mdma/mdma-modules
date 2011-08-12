@@ -20,15 +20,5 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="tablefooter clearfix">
-        <!--  <div class="actions">
-            <select>
-                <option>Действие:</option>
-                <option value="edit">Редактировать</option>
-                <option value="delete">Удалить</option>
-            </select>
-            <button class="button small">Применить</button>
-        </div>-->
-    </div>
 </form>
 <div><?php echo HTML::anchor('admin/'.$_name.'/add/', 'Добавить новый элемент', array('class'=>'icon-plus')); ?></div>
