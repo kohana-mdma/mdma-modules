@@ -9,6 +9,7 @@
         </thead>
         <tbody>
             <?php foreach ($items as $item): ?>
+
             <tr>
 				<td><?= $item->title ?></td>
                 <td>
