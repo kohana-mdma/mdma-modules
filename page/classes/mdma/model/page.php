@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Model_Page extends ORM_Versioned {
+class MDMA_Model_Page extends ORM_Versioned {
 
 	public function rules() {
 		return array(
