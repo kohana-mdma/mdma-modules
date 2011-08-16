@@ -73,6 +73,16 @@ class Model_<?=$name;?> extends ORM {
 	protected $_primary_key = 'id';
 	
 	/**
+	 * Rule definitions for validation
+	 *
+	 * @return array
+	 */
+	public function rules()
+	{
+		return array();
+	}
+	
+	/**
 	 * Filter definitions for validation
 	 *
 	 * @return array
