@@ -37,19 +37,24 @@ class Upload extends Kohana_Upload {
 		return parent::save($file, $filename, $directory, $chmod);
 	}
 	
+	/**
+	 *
+	 * @param array $_files
+	 * @return array 
+	 */
 	public static function multiple(array $_files)
 	{
 		foreach($_files as $name=>$file){
 			if(is_array($file['name'])){
-				$count = count($file['name']);
-				for($i=0; $i < $count; $i++){
-					$files[$name][$i] = array(
-						'name'     => $file['name'][$i],
-						'type'     => $file['type'][$i],
-						'tmp_name' => $file['tmp_name'][$i],
-						'error'    => $file['error'][$i],
-						'size'     => $file['size'][$i],
+				foreach(array_keys($file['name']) as $key){
+					$files[$name][$key] = array(
+						'name'     => $file['name'][$key],
+						'type'     => $file['type'][$key],
+						'tmp_name' => $file['tmp_name'][$key],
+						'error'    => $file['error'][$key],
+						'size'     => $file['size'][$key],
 					);
+					$files[$name] = self::multiple($files[$name]);
 				}
 			}else{
 				$files[$name] = $file;
