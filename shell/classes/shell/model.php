@@ -97,8 +97,29 @@ class Shell_Model
 		$view->labels = $labels;
 		$view->filters = $filters;
 		$view = $view->render();
-		Cache::instance()->set('model', $view);
 		
-		Console::instance()->out(Console::format('Модель создана', Console::SUCCESS));
+		$directory = APPPATH.'classes/model/';
+		if(strpos($name, '_') !== FALSE){
+			$directory .= substr(strtr(UTF8::strtolower($name), '_', '/'), 0, strrpos($name, '_') + 1);
+			
+			// Open directory
+			$dir = new SplFileInfo($directory);
+
+			// If the directory path is not a directory
+			if ( ! $dir->isDir())
+			{
+				// Create the directory 
+				mkdir($directory, 0700, TRUE);
+			}
+		}
+		$resouce = new SplFileInfo($directory.substr(UTF8::strtolower($name), strrpos($name, '_') +1 ).'.php');
+		$file = $resouce->openFile('w');
+		$file->fwrite($view, strlen($view));
+		
+		if((bool) $file->fflush()){
+			Console::instance()->out(Console::format('Модель создана', Console::SUCCESS));
+		}else{
+			Console::instance()->out(Console::format('Модель не создана', Console::ERROR));
+		}
 	}
 }
