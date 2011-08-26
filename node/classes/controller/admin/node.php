@@ -97,13 +97,18 @@ class Controller_Admin_Node extends Controller_Admin_Template {
 	    $this->auto_render = FALSE;
 		$id = (int) Arr::get($_POST, 'id');
 		$node = ORM::factory('node', $id);
-		$old_name = $node->name;
 		if($node->loaded()){
+			$parent = Arr::get($_POST, 'parent', $node->parent_id);
+			$position = Arr::get($_POST, 'position', $node->position);
 			try{
-				if(Arr::get($_POST, 'name'))$node->name = URL::title(Arr::get($_POST, 'name'));
-				$node->move(Arr::get($_POST, 'parent'))->set_position(Arr::get($_POST, 'position'));
-				if($old_name != $node->name){
-					Message::warn('Введенное название страницы уже существует. Сгенерированно новое название.');
+				if($parent != $node->parent_id)
+				{
+					$node->move($parent);
+				}
+				
+				if($position != $node->position)
+				{
+					$node->set_position($position);					
 				}
 				$this->response->body(json_encode(array('type'=>'success')));
 			}catch (ORM_Validation_Exception $e)
