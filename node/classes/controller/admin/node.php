@@ -39,11 +39,9 @@ class Controller_Admin_Node extends Controller_Admin_Template {
 	    $this->auto_render = FALSE;
 		$id = (int) Arr::get($_POST, 'id');
 		$node = ORM::factory('node', $id);
-		if($node->loaded() and Arr::get($_POST, 'title')){
-			if($node->model_id){
-				ORM::factory($node->model, $node->model_id)->set('title', Arr::get($_POST, 'title'))->save();
-			}
-			$node->title = Arr::get($_POST, 'title');
+		$title = Arr::get($_POST, 'title');
+		if($node->loaded() and $title){
+			$node->menu_title = $title;
 			$node->save();
 			$this->response->body(json_encode(array('type'=>'success')));
 		}else{
@@ -108,6 +106,9 @@ class Controller_Admin_Node extends Controller_Admin_Template {
 				
 				if($position != $node->position)
 				{
+					if($node->position < $position)
+						$position--;
+					
 					$node->set_position($position);					
 				}
 				$this->response->body(json_encode(array('type'=>'success')));
