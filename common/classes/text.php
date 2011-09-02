@@ -25,4 +25,35 @@ class Text extends Kohana_Text {
 	{
 		return HTML::mailto($matches[1].'@'.$matches[2].'.'.$matches[3], Arr::get($matches, 4));
 	}
+	
+	/**
+	 * Returns human readable sizes. Based on original functions written by
+	 * [Aidan Lister](http://aidanlister.com/repos/v/function.size_readable.php)
+	 * and [Quentin Zervaas](http://www.phpriot.com/d/code/strings/filesize-format/).
+	 *
+	 *     echo Text::bytes(filesize($file));
+	 *
+	 * @param   integer  size in bytes
+	 * @param   string   a definitive unit
+	 * @param   string   the return string format
+	 * @param   boolean  whether to use SI prefixes or IEC
+	 * @return  string
+	 */
+	public static function bytes($bytes, $force_unit = NULL, $format = NULL, $si = TRUE)
+	{
+		$translation = array(
+			"B" => "б",
+			"kB" => "кб",
+			"KiB" => "Кбайт",
+			"MB" => "мб",
+			"MiB" => "Понедельник",
+			"GB" => "гб",
+			"GiB" => "Гбайт",
+			"TB" => "тб",
+			"TiB" => "Тбайт",
+			"PB" => "пб",
+			"PiB" => "Пбайт",
+		);
+		return strtr(parent::bytes($bytes, $force_unit, $format, $si), $translation);
+	}
 } // End text
