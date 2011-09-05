@@ -1,7 +1,15 @@
 <?php
 
+Route::set('media', 'media(/<action>)',
+    array(
+        'action'    => '(index|move)',
+    ))->defaults(array(
+        'controller'=> 'media',
+        'action'    => 'index',
+    ));
+
 if(Kohana::$environment >= Kohana::DEVELOPMENT){
-	Route::set('media', '<dir>(/<file>)',
+	Route::set('php_media', '<dir>(/<file>)',
 			array(
 				'dir' => '(css|images|js)',
 				'file' => '.*'
@@ -12,12 +20,4 @@ if(Kohana::$environment >= Kohana::DEVELOPMENT){
 			'directory'  => NULL,
 			'file'       => NULL,
 		));
-}else{
-	Route::set('media', 'media(/<action>)',
-    array(
-        'action'    => '(index|move)',
-    ))->defaults(array(
-        'controller'=> 'media',
-        'action'    => 'index',
-    ));
 }
