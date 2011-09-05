@@ -1,0 +1,3 @@
+[submodule "orm-mp"]
+	path = orm-mp
+	url = http://github.com/Big-Shark/orm-mp.git
