@@ -598,12 +598,12 @@ var $current_td = false;
 				html = html.replace(new RegExp(fff,'gi'),lb+fff);
 			}
 
-			/*var xtags = ["<body","<head","<div","<p","<form","<fieldset"];
+			var xtags = ["<body","<head","<div","<p","<form","<fieldset"];
 			for (i = 0; i < xtags.length; ++i)
 			{
 				var xxx = xtags[i];
 				html = html.replace(new RegExp(xxx,'gi'),lb+lb+xxx);
-			}*/
+			}
             var xtags = ["</div>","</p>","</form>","</fieldset>","</h1>","</h2>"];
             for (i = 0; i < xtags.length; ++i)
             {
