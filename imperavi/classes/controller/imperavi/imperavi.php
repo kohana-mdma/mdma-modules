@@ -15,7 +15,7 @@ class Controller_Imperavi_Imperavi extends Controller {
 				$file_name = Kohana::$config->load('imperavi.'.$this->config.'.files_path');
 				$file_url = Kohana::$config->load('imperavi.'.$this->config.'.files_url');
 			}
-			$file_name = str_replace($file_name, '', Upload::save($_FILES['file'], NULL, $file_name, 777));
+			$file_name = str_replace($file_name, '', Upload::save($_FILES['file'], NULL, $file_name, Kohana::$config->load('imperavi.'.$this->config.'.mode')));
 
 			$file_ico = $this->get_ico($ext);
 
