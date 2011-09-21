@@ -106,6 +106,27 @@ $(function(){
     $('#myForm').validate();
     //$('.uniform input[type="checkbox"], .uniform input[type="radio"], .uniform input[type="file"]').uniform();
 
+	/**
+	 * Checkboxes on rbac module
+	 */
+	$(".table-rbac").each(function(){
+		var levelClass = "table-rbac-l",
+			$thisTable = $(this),
+			$allRow = $thisTable.find("tbody tr");
+		$allRow.find("input").bind("click", function(){
+			var $this = $(this),
+				level = $this.parents("tr").attr("class").substr(levelClass.length),
+				col = $this.parents("td").index(),
+				thisRow = $this.parents("tr").index(),
+				nextRow = $this.parents("tr").next("."+levelClass+level).index();
+			nextRow = nextRow == -1 ? $allRow.size() : nextRow;
+			$allRow.slice(thisRow, nextRow)
+				.children("td:nth-child("+(col+1)+")")
+				.children("input")
+				.attr("checked", $this.attr("checked"));
+		});
+	});
+
     /**
      * jsTree
      **************************/

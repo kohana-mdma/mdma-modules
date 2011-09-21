@@ -1079,3 +1079,19 @@ a.icon-plus{
 	background:url(/images/icons/plus.png) no-repeat 10px 2px;
 	margin:10px 0;
 }
+
+
+/*module rbac*/
+.table-rbac{
+	margin-bottom: 40px;
+}
+.table-rbac .table-rbac-l1 td:first-child{
+	font-weight: bold;
+}
+.table-rbac .table-rbac-l2 td:first-child{
+	padding-left: 30px;
+}
+.table-rbac .table-rbac-l2 td:first-child{
+	padding-left: 60px;
+}
+
