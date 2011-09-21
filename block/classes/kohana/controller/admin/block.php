@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Kohana_Controller_Admin_Block extends Controller_Admin_Template {
+abstract class Kohana_Controller_Admin_Block extends Controller_Admin_Template {
 
 
 	public function action_index()

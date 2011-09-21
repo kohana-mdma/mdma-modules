@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Kohana_Controller_Admin_Crud extends Controller_Admin_Template {
+abstract class Kohana_Controller_Admin_Crud extends Controller_Admin_Template {
 
 	protected $_model = NULL;
 	protected $_name = NULL;

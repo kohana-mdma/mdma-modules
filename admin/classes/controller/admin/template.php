@@ -5,11 +5,14 @@ abstract class Controller_Admin_Template extends Controller_Template {
     public $template = 'admin/template';
 
     public $ajaxAllow = false;
-
+	
     public function before()
     {
         parent::before();
-		if( ! A::logged_in('admin')) $this->request->redirect('admin/auth/login');
+		if( ! Auth::instance()->logged_in()) $this->request->redirect('admin/auth/login');
+
+		Rbac::check(get_class($this), Request::$current->action());
+		
 		if (($this->ajaxAllow and ($this->request->is_ajax() || isset ( $_GET ['ajax'] ))) or Request::initial() !== Request::current()) {
 			$this->auto_render = false;
 		}
