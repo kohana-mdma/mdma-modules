@@ -115,9 +115,17 @@ $(function(){
 			$allRow = $thisTable.find("tbody tr");
 		$allRow.find("input").bind("click", function(){
 			var $this = $(this),
-				level = $this.parents("tr").attr("class").substr(levelClass.length),
-				col = $this.parents("td").index();
-            $this.parents("tr").nextUntil("tr."+levelClass+level)
+                level = $this.parents("tr").attr("class").substring(levelClass.length, $this.parents("tr").attr("class").indexOf(" ")==-1 ? $this.parents("tr").attr("class").length : $this.parents("tr").attr("class").indexOf(" ")),
+				col = $this.parents("td").index(),
+				thisRow = $this.parents("tr").index();
+            if($this.parents("tr").next("tr."+levelClass+(level-1)).size()){
+                var nextRow = thisRow;
+            }
+            else{
+                var nextRow = $this.parents("tr").nextAll("tr."+levelClass+level).eq(0).index();
+                nextRow = nextRow == -1 ? $allRow.size() : nextRow;
+            }
+			$allRow.slice(thisRow, nextRow)
 				.children("td:nth-child("+(col+1)+")")
 				.children("input")
 				.attr("checked", $this.attr("checked"));
