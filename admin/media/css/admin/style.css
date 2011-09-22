@@ -1085,6 +1085,9 @@ a.icon-plus{
 .table-rbac{
 	margin-bottom: 40px;
 }
+.table-rbac .table-rbac-parent{
+    font-weight: bold;
+}
 .table-rbac .table-rbac-l1 td:first-child{
 	font-weight: bold;
 }
@@ -1093,5 +1096,11 @@ a.icon-plus{
 }
 .table-rbac .table-rbac-l2 td:first-child{
 	padding-left: 60px;
+}
+.table-rbac .table-rbac-l3 td:first-child{
+	padding-left: 90px;
+}
+.table-rbac .table-rbac-l4 td:first-child{
+	padding-left: 120px;
 }
 
