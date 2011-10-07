@@ -37,6 +37,9 @@ $(function(){
         forcePlaceholderSize: true
     });
 
+    /**
+     * Check all checkboxes on table
+     */
     var togel = false;
     $('#table1 .checkall').click(function () {
         $('#table1 :checkbox').attr('checked', !togel);
@@ -106,9 +109,6 @@ $(function(){
     $('#myForm').validate();
     //$('.uniform input[type="checkbox"], .uniform input[type="radio"], .uniform input[type="file"]').uniform();
 
-	/**
-	 * Checkboxes on rbac module
-	 */
 	$(".table-rbac").each(function(){
 		var levelClass = "table-rbac-l",
 			$thisTable = $(this),
@@ -116,8 +116,9 @@ $(function(){
 		$allRow.find("input").bind("click", function(){
 			var $this = $(this),
                 level = $this.parents("tr").attr("class").substring(levelClass.length, $this.parents("tr").attr("class").indexOf(" ")==-1 ? $this.parents("tr").attr("class").length : $this.parents("tr").attr("class").indexOf(" ")),
-				col = $this.parents("td").index(),
+				col  = $this.parents("td").index(),
 				thisRow = $this.parents("tr").index();
+            //FIX
             if($this.parents("tr").next("tr."+levelClass+(level-1)).size()){
                 var nextRow = thisRow;
             }
@@ -406,7 +407,7 @@ $(function(){
             }
         })
         .bind("show_contextmenu.jstree", function(){
-            console.log("!")
+//            console.log("!")
         });
     }
 

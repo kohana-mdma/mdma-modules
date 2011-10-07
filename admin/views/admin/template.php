@@ -1,29 +1,25 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<title>Админка</title>
-<meta charset="utf-8">
+    <title>Админка</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/css/admin/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/admin/superfish.css">
+    <!--<link rel="stylesheet" type="text/css" href="/css/admin/uniform.default.css">-->
+    <link rel="stylesheet" type="text/css" href="/css/admin/smoothness/jquery-ui-1.8.8.custom.css">
+    <script type="text/javascript" src="/js/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui-1.8.8.custom.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+    <!--<script type="text/javascript" src="/js/jquery.uniform.min.js"></script>-->
+    <script type="text/javascript" src="/js/superfish.js"></script>
+    <!--<script type="text/javascript" src="/js/jquery.flot.min.js"></script>-->
+    <script type="text/javascript" src="/js/custom.js"></script>
+    <script type="text/javascript" src="/js/editor/editor.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/editor/css/editor.css">
 
-<link rel="stylesheet" type="text/css" href="/css/admin/style.css">
-
-<link rel="stylesheet" type="text/css" href="/css/admin/superfish.css">
-<link rel="stylesheet" type="text/css" href="/css/admin/uniform.default.css">
-<link rel="stylesheet" type="text/css" href="/css/admin/smoothness/jquery-ui-1.8.8.custom.css">
-
-<script type="text/javascript" src="/js/jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="/js/jquery-ui-1.8.8.custom.min.js"></script>
-<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="/js/jquery.uniform.min.js"></script>
-<script type="text/javascript" src="/js/superfish.js"></script>
-<script type="text/javascript" src="/js/jquery.flot.min.js"></script>
-<script type="text/javascript" src="/js/custom.js"></script>
-<script type="text/javascript" src="/js/editor/editor.js"></script>
-<link rel="stylesheet" type="text/css" href="/js/editor/css/editor.css">
-
-<script type="text/javascript" src="/js/jstree/jquery.jstree.js"></script>
-<script type="text/javascript" src="/js/jstree/_lib/jquery.cookie.js"></script>
-<link rel="stylesheet" type="text/css" href="/js/jstree/themes/default/style.css">
-
+    <script type="text/javascript" src="/js/jstree/jquery.jstree.js"></script>
+    <script type="text/javascript" src="/js/jstree/_lib/jquery.cookie.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/jstree/themes/default/style.css">
 </head>
 <body class="fluid">
 
