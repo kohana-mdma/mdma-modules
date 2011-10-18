@@ -3,7 +3,7 @@
 if (Kohana::$errors)
 {
 	// Override Kohana exception handler
-	//set_exception_handler(array('Error_Exception', 'handler'));
+	set_exception_handler(array('MDMA_Exception', 'handler'));
 }
 
 Route::set('error', 'error/<action>(/<message>)', array('action' => '[0-9]++', 'message' => '.+'))
