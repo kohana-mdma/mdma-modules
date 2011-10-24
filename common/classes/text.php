@@ -42,17 +42,17 @@ class Text extends Kohana_Text {
 	public static function bytes($bytes, $force_unit = NULL, $format = NULL, $si = TRUE)
 	{
 		$translation = array(
-			"B" => "б",
-			"kB" => "кб",
-			"KiB" => "Кбайт",
-			"MB" => "мб",
-			"MiB" => "Понедельник",
-			"GB" => "гб",
-			"GiB" => "Гбайт",
-			"TB" => "тб",
-			"TiB" => "Тбайт",
-			"PB" => "пб",
-			"PiB" => "Пбайт",
+			"B" => "Б",
+			"kB" => "Кб",
+			"KiB" => "Кб",
+			"MB" => "Мб",
+			"MiB" => "Мб",
+			"GB" => "Гб",
+			"GiB" => "Гб",
+			"TB" => "Тб",
+			"TiB" => "Тб",
+			"PB" => "Пб",
+			"PiB" => "Пб",
 		);
 		return strtr(parent::bytes($bytes, $force_unit, $format, $si), $translation);
 	}
