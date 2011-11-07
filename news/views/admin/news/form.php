@@ -13,6 +13,14 @@
 		<dd><textarea name="news[text]" id="news-text" class="big editor" rows="15"><?= Arr::path($data, 'news.text'); ?></textarea></dd>
 		<dt><label for="news-created_on">Дата публикация (оставить пустым если опубликовать сейчас):</label></dt>
 		<dd><input id="news-created_on" type="text" name="news[created_on]" value="<?= Arr::path($data, 'news.created_on'); ?>" /></dd>
+		<dt><label for="node-title">Заголовок окна:</label></dt>
+		<dd><input id="node-title" type="text" name="node[title]" value="<?= Arr::path($data, 'node.title'); ?>" /></dd>
+		<dt><label for="node-name">Псевдоним (название в URL; латиница, без пробелов и спецсимволов):</label></dt>
+		<dd><?=Form::input('node[name]', Arr::path($data, 'node.name'), array('id'=>'node-name'));?></dd>
+    	<dt><?=Form::label('node-keywords', 'Ключевые слова:');?></dt>
+		<dd><?=Form::textarea('node[keywords]', Arr::path($data, 'node.keywords'), array('id'=>'node-keywords'));?></dd>
+		<dt><label for="node-description">Описание:</label></dt>
+		<dd><?=Form::textarea('node[description]', Arr::path($data, 'node.description'), array('id'=>'node-description'));?></dd>
 	</dl>
 	<p>
         <button type="submit" class="button big">Сохранить</button>
