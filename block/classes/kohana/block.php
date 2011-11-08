@@ -12,8 +12,10 @@ class Kohana_Block {
 			Cache::instance()->set('block-'.$id, $block);
 		}
 		
-        $attributes["class"] = Arr::get($attributes, 'class', '');
-        $attributes["class"] .=" blockedit-".$id;
+        if(Auth::instance()->logged_in('admin')){
+			$attributes["class"] = Arr::get($attributes, 'class', '');
+			$attributes["class"] .=" blockedit-".$id;
+		}
         //TODO create viewer for that
         return "<div ".HTML::attributes($attributes).">".$block->body."</div>";
     }

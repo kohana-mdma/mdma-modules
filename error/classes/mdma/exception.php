@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
 
-class Kohana_Exception extends Kohana_Kohana_Exception {
+class MDMA_Exception extends Kohana_Kohana_Exception {
 
     public static function handler(Exception $e)
     {

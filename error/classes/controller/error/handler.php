@@ -1,8 +1,6 @@
 <?php defined('SYSPATH') or die('No direct access allowed.');
 
 class Controller_Error_Handler extends Controller_Error_Template {
-
-	public $view = 'error/template';
         
     public function before()
 	{
