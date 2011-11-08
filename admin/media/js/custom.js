@@ -156,6 +156,9 @@ $(function(){
                 location.href = "/admin/"+model+"/add/node/"+parent;
             }
         }
+        if(model=="news"){
+            location.href = "/admin/"+model+"/add/";
+        }
         //var title = data.rslt.name;
         /*$.post(
             "/admin/node/add",
@@ -256,6 +259,20 @@ $(function(){
                         "remove" : false,
                         "valid_children" : "none"
                     },
+                    //news nodes
+                    "news.root": {
+                        "icon" : { "image" : "/js/jstree/themes/default/icon-folder.png"},
+                        "delete_node" : false,
+                        "remove" : false,
+                        "valid_children" : "news.leaf"
+                    },
+                    "news.leaf": {
+                        "icon" : { "image" : "/js/jstree/themes/default/icon-blue-document-text-image.png"},
+                        "valid_children" : "none",
+                        "delete_node" : false,
+                        "remove" : false,
+                        "start_drag" : false
+                    }
                 }
             },
             "contextmenu": {
@@ -291,6 +308,29 @@ $(function(){
                                 }
                             }
                             break;
+                        //news nodes
+                        case "news.root":
+                            return {
+                                "create" : {
+                                    "label"             : "Создать новость",
+                                    "action"            : function (obj) { createNode(obj); }
+                                }
+                            }
+                            break;
+                        case "news.leaf":
+                        case "news.node":
+                            return {
+                                "rename" : {
+                                    "label"             : "Переименовать",
+                                    "action"            : function (obj) { this.rename(obj); }
+                                },
+                                "show": {
+                                    "label"     : "Посмотреть на сайте",
+                                    "action"   : function (obj) { showNode(obj); }
+                                }
+                            }
+                            break;
+                        ///news nodes
                         case "term.root":
                             return {
 
