@@ -845,18 +845,28 @@ form textarea.medium {
 form input.big,
 form select.big,
 form textarea.big {
-    width: 540px
+    width: 100%;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	font-size: 18px;
 }
 form textarea{
     width:98%;
     height:100px;
 }
 form textarea.big {
-    width:98%;
+    width:100% !important;
     height:300px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-left: 0;
+	margin-right: 0;
 }
 form textarea.big.editor{
     width:100%;
+
 }
 input#newstitle {
     font-size: 20px;
