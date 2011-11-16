@@ -36,7 +36,26 @@
 			</dl>
         </div>
         <div id="images">
-            контент по изображениям
+            <? if(isset($data['images']) and count($data['images'])):?>
+			<ul class="photos photos-gallery sortable">
+				<? foreach($data['images'] as $image): ?>
+				<li>
+					<img src="<?=URL::site(Kohana::$config->load('upload.news').$image->thumb);?>" />
+					<div class="links">
+						<a href="<?=URL::site(Kohana::$config->load('upload.news').$image->file);?>" rel="facebox">Просмотреть</a>
+						<a class="delete" href="<?=URL::site('admin/'.$_name.'_image/delete/'.$image->id);?>">Удалить</a>
+					</div>
+				</li>
+				<? endforeach; ?>
+			</ul>
+			<br/>
+			<? endif; ?>
+
+			<h1>Загрузить в галерею</h1>
+			<dl>
+				<dt><label for="photo_file">Загрузить фотографии (можно выбирать много):</label></dt>
+				<dd><input type="file" id="photo_file" multiple="true" name="images[]"/></dd>
+			</dl>
         </div>
     </div>
     <p>

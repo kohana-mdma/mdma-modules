@@ -2,6 +2,12 @@
 
 class MDMA_Model_News extends ORM {
 	
+	protected $_has_many = array(
+		'images' => array(
+			'model' => 'news_image'
+		),
+	);
+		
 	function filters()
 	{
 		return array(

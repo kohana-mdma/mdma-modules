@@ -15,10 +15,10 @@ class Model_Node extends ORM_MP {
 				array(array($this, 'generation_unique_name'), array(':value'))
 			),
 			'description' => array(
-				array('HTML::entities', array(':value')),
+				array('strip_tags', array(':value')),
 			),
 			'keywords' => array(
-				array('HTML::entities', array(':value')),
+				array('strip_tags', array(':value')),
 				array(array($this, 'unique_keywords'), array(':value'))
 			),
 		);
