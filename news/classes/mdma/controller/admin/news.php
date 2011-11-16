@@ -6,7 +6,7 @@ class MDMA_Controller_Admin_News extends Controller_Admin_CRUD {
 	{
 		$config = Kohana::$config->load('news');
 		$dir = DOCROOT.Kohana::$config->load('upload.news');
-		if($item->saved()){
+		if($item->loaded()){
 			$node = ORM::factory('node')
 					->where('model', '=', 'news')
 					->where('model_id', '=', $item->pk())

@@ -106,8 +106,6 @@ class Model_Node extends ORM_MP {
 					}
 				}
 			}
-		}else{
-			$value = NULL;
 		}
 		return $value;
 	}
