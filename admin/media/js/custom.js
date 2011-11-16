@@ -101,7 +101,7 @@ $(function(){
     $('.tabs > li a').click(function () {
         var tab_id = $(this).attr('href');
         $(tab_id).parent().children().hide();
-        $(tab_id).fadeIn();
+        $(tab_id).show();
         $(this).parent().parent().children().removeClass('selected');
         $(this).parent().addClass('selected');
         return false
