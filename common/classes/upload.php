@@ -44,6 +44,7 @@ class Upload extends Kohana_Upload {
 	 */
 	public static function multiple(array $_files)
 	{
+		$files = array();
 		foreach($_files as $name=>$file){
 			if(is_array($file['name'])){
 				foreach(array_keys($file['name']) as $key){

@@ -65,13 +65,14 @@ class Model_Node extends ORM_MP {
 		$target = $target ? $this->target($target) : null;
 		$this->set_position(null);
 		$children = $this->load_tree()->children;
-		$this->name = $this->generation_unique_name($this->name);
+		
 		if ($target && $target->id) {
 			if ($target->level == $this->max_level) {
 				$target = $target->parent;
 			}
 			$this->level = $target->level + 1;
 			$this->path  = $target->path . $this->id . '.';
+			$this->name = $this->generation_unique_name($this->name);
 			$this->url_path  = $target->url_path . $this->name . '/';
 			$this->position = count($target->load_tree()->children) + 1;
 			$target->add_child($this);
@@ -79,6 +80,7 @@ class Model_Node extends ORM_MP {
 			$roots = $this->roots->find_all();
 			$this->level = 0;
 			$this->path  = '.' . $this->id . '.';
+			$this->name = $this->generation_unique_name($this->name);
 			$this->url_path  = '/' . $this->name . '/';
 			$this->position = $roots ? count($roots) + ($new ? 0 : 1) : 0;
 		}

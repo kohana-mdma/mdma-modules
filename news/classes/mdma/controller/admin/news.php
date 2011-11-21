@@ -28,57 +28,58 @@ class MDMA_Controller_Admin_News extends Controller_Admin_CRUD {
 			$node->insert($parent);
 			
 			$files = Upload::multiple($_FILES);
-			
-			foreach($files['images'] as $file){
-				 $upload = Validation::factory(array('file'=>$file))
-					->rule('file', 'Upload::valid')
-					->rule('file', 'Upload::not_empty')
-					->rule('file', 'Upload::type', array(':value', array('jpg', 'png', 'gif')))
-					->rule('file', 'Upload::size', array(':value', '8M'));
+			if(isset($files['images'])){
+				foreach($files['images'] as $file){
+					 $upload = Validation::factory(array('file'=>$file))
+						->rule('file', 'Upload::valid')
+						->rule('file', 'Upload::not_empty')
+						->rule('file', 'Upload::type', array(':value', array('jpg', 'png', 'gif')))
+						->rule('file', 'Upload::size', array(':value', '8M'));
 
-				if ($upload->check()) {
-					
-					if(file_exists($dir.$file['name'])){
-						$file_info = pathinfo($dir.uniqid().$file['name']);
-					}else{
-						$file_info = pathinfo($dir.$file['name']);
-					}
+					if ($upload->check()) {
 
-					$image = ORM::factory('news_image');
-					$image->file = $file_info['basename'];				
-					$image->thumb = $file_info['filename'].'_thumb.'.$file_info['extension'];
-					$image->news_id = $item->pk();
-
-					$info = getimagesize($file['tmp_name']);
-
-					$thumb_w = Arr::path($config, 'size_thumb.0', NULL);
-					$thumb_h = Arr::path($config, 'size_thumb.1', NULL);
-					$thumb = Image::factory($file['tmp_name'])->resize($thumb_w, $thumb_h,Image::INVERSE);
-					if($thumb_w and $thumb_h)
-					{
-						$thumb->crop($thumb_w, $thumb_h);
-					}
-					$thumb->save($file_info['dirname'].DIRECTORY_SEPARATOR.$image->thumb, Arr::path($config, 'size_thumb.2', 100));
-					
-					
-					$image_w = Arr::path($config, 'size.0', NULL);
-					$image_h = Arr::path($config, 'size.1', NULL);
-					
-					if(($image_w and $info['0'] > $image_w) or ($image_h and $info['1'] > $image_h))
-					{
-						$img = Image::factory($file['tmp_name'])->resize($image_w, $image_h, Image::AUTO);
-						if($image_w and $image_h)
-						{
-							$img->crop($image_w, $image_h);
+						if(file_exists($dir.$file['name'])){
+							$file_info = pathinfo($dir.uniqid().$file['name']);
+						}else{
+							$file_info = pathinfo($dir.$file['name']);
 						}
-						$img->save($file_info['dirname'].DIRECTORY_SEPARATOR.$image->file, Arr::path($config, 'size.2', NULL));
-					}
-					else
-					{
-						Image::factory($file['tmp_name'])->save($file_info['dirname'].DIRECTORY_SEPARATOR.$image->file, Arr::path($config, 'size.2', 100));
-					}
 
-					$image->save();
+						$image = ORM::factory('news_image');
+						$image->file = $file_info['basename'];				
+						$image->thumb = $file_info['filename'].'_thumb.'.$file_info['extension'];
+						$image->news_id = $item->pk();
+
+						$info = getimagesize($file['tmp_name']);
+
+						$thumb_w = Arr::path($config, 'size_thumb.0', NULL);
+						$thumb_h = Arr::path($config, 'size_thumb.1', NULL);
+						$thumb = Image::factory($file['tmp_name'])->resize($thumb_w, $thumb_h,Image::INVERSE);
+						if($thumb_w and $thumb_h)
+						{
+							$thumb->crop($thumb_w, $thumb_h);
+						}
+						$thumb->save($file_info['dirname'].DIRECTORY_SEPARATOR.$image->thumb, Arr::path($config, 'size_thumb.2', 100));
+
+
+						$image_w = Arr::path($config, 'size.0', NULL);
+						$image_h = Arr::path($config, 'size.1', NULL);
+
+						if(($image_w and $info['0'] > $image_w) or ($image_h and $info['1'] > $image_h))
+						{
+							$img = Image::factory($file['tmp_name'])->resize($image_w, $image_h, Image::AUTO);
+							if($image_w and $image_h)
+							{
+								$img->crop($image_w, $image_h);
+							}
+							$img->save($file_info['dirname'].DIRECTORY_SEPARATOR.$image->file, Arr::path($config, 'size.2', NULL));
+						}
+						else
+						{
+							Image::factory($file['tmp_name'])->save($file_info['dirname'].DIRECTORY_SEPARATOR.$image->file, Arr::path($config, 'size.2', 100));
+						}
+
+						$image->save();
+					}
 				}
 			}
 		}
