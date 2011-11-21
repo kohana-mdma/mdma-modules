@@ -97,6 +97,13 @@ class MDMA_Controller_Admin_News extends Controller_Admin_CRUD {
 	
 	protected function before_delete(ORM $item = NULL)
 	{
+		$node = ORM::factory('node')
+					->where('model', '=', 'news')
+					->where('model_id', '=', $item->pk())
+					->find();
+		if($node->loaded())
+			$node->delete();
+		
 		foreach($item->images->find_all() as $image){
 			$image->delete();
 		}
