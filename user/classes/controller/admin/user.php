@@ -29,7 +29,10 @@ class Controller_Admin_User extends Controller_Admin_Template {
 			{
 				$user->save();
 				$user_array = $user->as_array();
-				$user->remove('roles')->add('roles', Arr::get($_POST, 'roles', array()));
+				$user->remove('roles');
+				if(Arr::get($_POST, 'roles')){
+					$user->add('roles', Arr::get($_POST, 'roles', array()));
+				}
 				$user_array['roles'] = $user->roles->find_all()->as_array('id', 'id');
 				Message::set(Message::SUCCESS, 'Изменения прошли удачно');
 				$this->template->content->data = $user_array;
