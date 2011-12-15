@@ -485,6 +485,156 @@ $(function(){
         };
 
     }
+    /**
+     * Set wysiwyg
+     */
+    if($.fn.editor){
+        //default editor
+	    /*
+        if($("textarea.editor").size()){
+            $("textarea.editor").each(function(){
+                $this = $(this);
+                $("textarea.editor").editor({
+                    toolbar: 'blockedit',
+                    skin: 'carrara_white',
+                    body_class:  $this.parents("form").getClassBegins("model-")+" "+$("textarea.editor").getClassBegins("id-")
+                }).showTerm = function(){
+                    editorActive = this;
+                    var handler = function()
+                    {
+                        var sel = this.get_selection();
+                       if ($.browser.msie)
+                        {
+                                var temp = sel.htmlText.match(/id="(.*?)"/gi);
+                                if (temp != null)
+                                {
+                                    temp = new String(temp);
+                                    temp = temp.replace(/id="(.*?)"/gi, '$1');
+                                }
+                                var text = sel.text;
+                                if (temp != null) var id = temp;
+                               else  var id = '';
+                        }
+                        else
+                        {
+                            if (sel.anchorNode.parentNode.tagName == 'ABBR')
+                            {
+                                var id = sel.anchorNode.parentNode.id;
+                                var text = $(sel.anchorNode.parentNode).text();
+                                if (sel.toString() == '') this.insert_link_node = sel.anchorNode.parentNode;
+                            }
+                            else
+                            {
+                                var text = sel.toString();
+                                var id = '';
+                            }
+                        }
+
+                        $('#redactor_term_text').val(text).focus();
+                        $('#redactor_term').val(id);
+                        //select option by text
+                        if($('#redactor_term_text').val()!=""){
+                            selectByText();
+                        }
+                        //search into option
+                        $('#redactor_term_text').bind("keyup", function(){
+                            selectByText();
+                        });
+
+                        function selectByText(){
+                            var text = $('#redactor_term_text').val().substr(0,4);
+                            if(text!=""){
+                                $('#redactor_term option').each(function(){
+                                if($(this).text().toLowerCase().indexOf(text.toLowerCase())==0){
+                                    $(this).attr("selected", "selected");
+                                }
+                                });
+                            }
+                        }
+                    }.bind(this);
+
+                    this.modalInit("Термин", "/admin/term/", 400, 300, handler);
+
+                    $('#redactor_term option').each(function(){
+                                if($(this).text().indexOf(text)==0){
+                                    $(this).attr("selected", "selected");
+                                }
+                            });
+                    //insert term to work area
+                    this.insertTerm = function(){
+                        var id = $('#redactor_term').val();
+                        if (id == '') return true;
+
+                        var text = $('#redactor_term_text').val();
+                        if (text == '') text = $('#redactor_term').find('option[value="'+id+'"]').text();
+
+                        var space = {"l":"", "r":""};
+                        if($.trim(text)!=text){
+                            if(text.substr(0,1)==" "){
+                                space.l=" ";
+                            }
+                            if(text.substr(text.length-1,1)==" "){
+                                space.r=" ";
+                            }
+                        }
+                        var abbr = space.l+'<abbr id="' + id + '">' + $.trim(text) + '</abbr>'+space.r;
+                        if (abbr)
+                        {
+                            if (this.insert_link_node)
+                            {
+                                $(this.insert_link_node).text(text);
+                                $(this.insert_link_node).attr('id', id);
+
+                                return true;
+                            }
+                            else
+                            {
+                                editorActive.frame.get(0).contentWindow.focus();
+                                editorActive.execCommand('inserthtml', abbr);
+                            }
+                        }
+                        $('#redactor_term_text').unbind("keyup");
+                        this.modalClose();
+                    }
+                };
+            });
+
+        };*/
+        //editor with other styles
+        if($("textarea.editor_withstory").size()){
+            $("textarea.editor_withstory").each(function(){
+                var $this = $(this);
+                $this.editor({
+                    toolbar: 'withstory',
+                    skin: 'carrara_white',
+                    body_class: $this.parents("form").getClassBegins("model-")
+                }).showQuestion = function(){
+                    RedactorActive = this;
+                    //console.log(this.opts.path);
+                    this.modalInit("Вставка вопроса", this.opts.path + 'plugins/question.html', 400, 500);
+
+                    this.insertQuestion = function(){
+                        /*var data = $('#redactorInsertQuestionForm').val();*/
+                        var data ={
+                            question: $('#redactor_insert_question').val(),
+                            answer1: $('#redactor_insert_answer1').val(),
+                            answer2: $('#redactor_insert_answer2').val(),
+                            answertext1: $('#redactor_insert_answertext1').val(),
+                            answertext2: $('#redactor_insert_answertext2').val()
+                        };
+                        data = '<div class="modal-box-question"><h3>'+data.question+'</h3><div class="modal-box-answers"><a href="#">'
+                        +data.answer1+'</a> или <a href="#">'+data.answer2+'</a></div><div class="modal-box-answertext">'+data.answertext1+'</div>'+
+                        '<div class="modal-box-answertext">'+data.answertext2+'</div></div>';
+                        //if (RedactorActive.opts.visual) data = '<div class="redactor_video_box">' + data + '</div>';
+
+                        RedactorActive.execCommand('inserthtml', data);
+                        this.modalClose();
+                    }
+               };
+            });
+
+        };
+    }
 });
 
 function readCookie(name) {
