@@ -42,6 +42,9 @@ class MDMA_Media {
 						if( ! is_dir($to_path)){
 							mkdir($to_path, 0755, true);	
 						}
+						if(file_exists($to_path.$file))
+							unlink($to_path.$file);
+						
 						copy($from_path.$file, $to_path.$file);
 					}
 				}

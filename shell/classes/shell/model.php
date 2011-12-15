@@ -109,7 +109,7 @@ class Shell_Model
 			if ( ! $dir->isDir())
 			{
 				// Create the directory 
-				mkdir($directory, 0700, TRUE);
+				mkdir($directory, 0755, TRUE);
 			}
 		}
 		$resouce = new SplFileInfo($directory.substr(UTF8::strtolower($name), strrpos($name, '_') +1 ).'.php');
