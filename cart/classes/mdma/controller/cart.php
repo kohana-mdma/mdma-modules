@@ -1,11 +1,10 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-abstract class MDMA_Controller_Cart extends Controller {
+abstract class MDMA_Controller_Cart extends Controller_Template_Cart {
 
 	public function action_index()
 	{
-		//$this->auto_render = FALSE;
-		Cart::instance()->render();
+		$this->template->content = Cart::instance()->render();
 	}
 
 	public function action_add()
