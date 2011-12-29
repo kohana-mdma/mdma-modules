@@ -1,24 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-abstract class MDMA_Cart_Cookie extends Cart {
-	
-	/**
-	 * @var array cookie
-	 */
-	protected $cookie = array();
-	
-	/**
-	 * @var string cookie name
-	 */
-	public static $name = 'cart';
-	
-	/**
-	 * @return  void
-	 */
-	public function __construct()
-	{
-		$this->cookie =  json_decode(Cookie::get('cart', '{}'), TRUE);
-	}
+abstract class MDMA_Cart_Db extends Cart {
 	
 	/**
 	 * @param   mixed Primary key or Object
@@ -47,30 +29,26 @@ abstract class MDMA_Cart_Cookie extends Cart {
 	public function qty($id, $value, $op = '=')
 	{
 		$id = $this->target($id)->pk();
-		if( ! array_key_exists($id, $this->cookie))
-		{
-			$this->cookie[$id] = 0;
-		}
-		
+
+		$cart = DB::update('cart')->where('user_id', '=', Auth::instance()->get_user()->pk());
 		switch ($op)
 		{
 			case '=':
-				$this->cookie[$id] = $value;
+				$cart->set(array('qty' => DB::expr('qty = 1')));
 			break;	
 			case '+':
-				$this->cookie[$id] += $value;
+				$cart->set(array('qty' => DB::expr('qty + 1')));
 			break;	
 			case '-':
-				$this->cookie[$id] -= $value;
+				$cart->set(array('qty' => DB::expr('qty - 1')));
 			break;	
 			default:
 				throw new Cart_Exception('Operator may be used only +, - or =');
 			break;	
 		}
-		if($this->cookie[$id] <= 0)
-			unset($this->cookie[$id]);
+		$cart->save();
 		
-		return $this->set();
+		return $this;
 	}
 	
 	/**
@@ -78,12 +56,15 @@ abstract class MDMA_Cart_Cookie extends Cart {
 	 */
 	public function get_all()
 	{
-		$ids = array_keys($this->cookie);
+		$items = DB::update('cart')
+				->where('user_id', '=', Auth::instance()->get_user()->pk())
+				->find_all()
+				->as_array('id', 'qty');
 		
-		$products = $this->get_products($ids);
+		$products = $this->get_products(array_keys($items));
 		$result = array();
 		foreach ($products as $id => $product) {
-			$result[] = new Cart_item($id, $this->cookie[$id], $product);
+			$result[] = new Cart_item($id, $items[$id], $product);
 		}
 		return $result;
 		
@@ -95,16 +76,12 @@ abstract class MDMA_Cart_Cookie extends Cart {
 	 */
 	public function get($id)
 	{
-		return new Cart_item($id, $this->cookie[$id], ORM::factory($model, $id));
-	}
-	
-	/**
-	 * @return  Cart
-	 */
-	protected function set()
-	{
-		Cookie::set(Cart_Cookie::$name, json_encode($this->cookie), Date::YEAR);
-		return $this;
+		$item = DB::update('cart')
+				->where('user_id', '=', Auth::instance()->get_user()->pk())
+				->where('product_id', '=', $id)
+				->find();
+				
+		return new Cart_item($item['product_id'], $item['qty'], ORM::factory($model, $item['product_id']));
 	}
 	
 }

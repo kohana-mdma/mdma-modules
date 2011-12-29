@@ -21,7 +21,7 @@ abstract class MDMA_Cart {
 	{
 		$driver = 'cookie';
 		if(Auth::instance()->logged_in()){
-			//$driver = 'ORM';
+			//$driver = 'db';
 		}
 		// Create a new cache type instance
 		$cache_class = 'Cart_'.ucfirst($driver);
