@@ -38,6 +38,14 @@ abstract class MDMA_Cart_Cookie extends Cart {
 		return $this->qty($id, 0, '=');
 	}
 	
+	 /**
+	 * @return  integer
+	 */
+	public function count()
+	{
+		return array_sum($this->cookie );
+	}
+	
 	/**
 	 * @param   mixed Primary key or Object
 	 * @param   integer Value

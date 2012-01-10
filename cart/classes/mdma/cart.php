@@ -62,14 +62,17 @@ abstract class MDMA_Cart {
 	 */
 	abstract public function get($id);
 	
+	 /**
+	 * @return  integer
+	 */
+	abstract public function count();
+	
 	/**
 	 * @param  mixed Name of the view to use, or a Kohana_View object
 	 * @return string cart output (HTML)
 	 */
 	public function render($view = 'cart')
 	{
-		print_r($this->get_all());
-die('11');
 		if ( ! $view instanceof Kohana_View)
 		{
 			// Load the view file
