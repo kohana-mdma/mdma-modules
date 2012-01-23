@@ -13,15 +13,18 @@ abstract class MDMA_Cart {
 	public static $model = 'product';
 
 	/**
-	 * @param   string   the name of the cache group to use [Optional]
+	 * @param   string   the name of the cart group to use [Optional]
 	 * @return  Cart
 	 * @throws  Cart_Exception
 	 */
-	public static function instance()
+	public static function instance($driver = NULL)
 	{
-		$driver = 'cookie';
-		if(Auth::instance()->logged_in()){
-			//$driver = 'db';
+		if($driver == NULL)
+		{
+			$driver = 'cookie';
+			if(Auth::instance()->logged_in()){
+				$driver = 'db';
+			}
 		}
 		// Create a new cache type instance
 		$cache_class = 'Cart_'.ucfirst($driver);
@@ -66,6 +69,11 @@ abstract class MDMA_Cart {
 	 * @return  integer
 	 */
 	abstract public function count();
+	
+	/**
+	 * @return  Cart
+	 */
+	abstract public function delete_all();
 	
 	/**
 	 * @param  mixed Name of the view to use, or a Kohana_View object
@@ -125,6 +133,30 @@ abstract class MDMA_Cart {
 			throw new Cart_Exception('The object must be of class ORM and must be loaded');
 		}
 		return $target;
+	}
+	
+	/**
+	* @param  string Driver 1
+	* @param  string Driver 2
+	* @return void
+	*/
+	static public function copy ($drive1, $drive2)
+	{
+		
+		if(!($drive1 instanceof Cart) or !($drive2 instanceof Cart))
+		{
+			throw new Cart_Exception('Drivers must be inherited from the class cart');
+		}
+		$items = $drive1->get_all();
+		if($items)
+		{
+			$drive2->delete_all();
+			foreach($items as $item)
+			{
+				$drive2->qty($item->id, $item->qty);
+			}
+			$drive1->delete_all();
+		}
 	}
 }
 

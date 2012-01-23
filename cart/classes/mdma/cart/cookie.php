@@ -43,7 +43,16 @@ abstract class MDMA_Cart_Cookie extends Cart {
 	 */
 	public function count()
 	{
-		return array_sum($this->cookie );
+		return array_sum($this->cookie);
+	}
+	
+	 /**
+	 * @return  Cart
+	 */
+	public function delete_all()
+	{
+		$this->cookie = array();
+		return $this->set();
 	}
 	
 	/**
@@ -54,6 +63,9 @@ abstract class MDMA_Cart_Cookie extends Cart {
 	 */
 	public function qty($id, $value, $op = '=')
 	{
+		if(!is_int($value) or $value < 0 )
+			throw new Cart_Exception('Value must be a number, and not be negative');
+		
 		$id = $this->target($id)->pk();
 		if( ! array_key_exists($id, $this->cookie))
 		{
