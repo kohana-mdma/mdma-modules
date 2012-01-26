@@ -11,7 +11,7 @@ Route::set('media', 'media(/<action>)',
 if(Kohana::$environment >= Kohana::DEVELOPMENT){
 	Route::set('php_media', '<dir>(/<file>)',
 			array(
-				'dir' => '(css|images|js)',
+				'dir' => '(css|images|img|js)',
 				'file' => '.*'
 		))
 		->defaults(array(
