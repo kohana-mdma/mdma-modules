@@ -43,8 +43,12 @@ abstract class Kohana_Controller_Admin_Block extends Controller_Admin_Template {
 			else
 			{
 				$block = $block->values($_POST, array('name', 'body'));
+				
 				if($id != Arr::get($_POST,'id') and ! $this->request->is_ajax()){
 					$block->id = Arr::get($_POST,'id');
+				}elseif($this->request->is_ajax()){
+					$block->id = $id;
+					if(!$block->name) $block->name = $id;
 				}
 
 				try
