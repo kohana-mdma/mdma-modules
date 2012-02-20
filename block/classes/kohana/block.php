@@ -5,8 +5,13 @@
 class Kohana_Block {
 	public static function show($id, array $attributes = array())
     {
-		$block = Cache::instance()->get('block-'.$id, (object) ORM::factory('block')->where('id', '=', $id)->find()->as_array());
+		$block = Cache::instance()->get('block-'.$id, NULL);
 		
+		if($block == NULL)
+		{
+			$block = (object) ORM::factory('block')->where('id', '=', $id)->find()->as_array();
+		}
+			
 		if(Kohana::$caching and $block)
 		{
 			Cache::instance()->set('block-'.$id, $block);
