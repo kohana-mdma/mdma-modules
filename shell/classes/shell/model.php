@@ -98,6 +98,7 @@ class Shell_Model
 		$view->filters = $filters;
 		$view = $view->render();
 		
+		$filename = $name;
 		$directory = APPPATH.'classes/model/';
 		if(strpos($name, '_') !== FALSE){
 			$directory .= substr(strtr(UTF8::strtolower($name), '_', '/'), 0, strrpos($name, '_') + 1);
@@ -111,8 +112,9 @@ class Shell_Model
 				// Create the directory 
 				mkdir($directory, 0755, TRUE);
 			}
+			$filename = substr($name, strrpos($name, '_') + 1);
 		}
-		$resouce = new SplFileInfo($directory.substr(UTF8::strtolower($name), strrpos($name, '_') +1 ).'.php');
+		$resouce = new SplFileInfo($directory.UTF8::strtolower($filename).'.php');
 		$file = $resouce->openFile('w');
 		$file->fwrite($view, strlen($view));
 		
