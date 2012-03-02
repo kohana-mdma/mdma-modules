@@ -22,7 +22,7 @@ foreach(ORM::factory($_model)->belongs_to() as $key=>$to){
 	<dd><input type="hidden" name="<?=$_model.'['.$key.'][form]';?>" value="1" /> 
 <?php echo '	<?=Form::select(
 			\''.$_model.'['.$key.']'.'\',
-			ORM::factory('.$belongs_to[$key].')->find_all()->as_array(\'id\',\'title\'),
+			ORM::factory(\''.$belongs_to[$key].'\')->find_all()->as_array(\'id\',\'title\'),
 			Arr::path($data, \''.$_model.'.'.$key.'\'),
 			array(\'id\'=>\''.$_model.'-'.$key.'\')
 		); ?>'; ?>
