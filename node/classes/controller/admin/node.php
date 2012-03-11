@@ -118,4 +118,17 @@ class Controller_Admin_Node extends Controller_Admin_Template {
 			}
 		}
 	}
+	
+	public function action_hide(){
+	    $this->auto_render = FALSE;
+		$id = (int) Arr::get($_POST, 'id');
+		$node = ORM::factory('node', $id);
+		if($node->loaded()){
+			$node->hidden = (int) !((bool) $node->hidden);
+			$node->save();
+			$this->response->body(json_encode(array('type'=>'success', 'data'=>$node->as_array())));
+		}else{
+			$this->response->body(json_encode(array('type'=>'error')));
+		}
+	}
 } // End node

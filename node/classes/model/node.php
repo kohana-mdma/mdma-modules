@@ -2,6 +2,13 @@
 
 class Model_Node extends ORM_MP {
 
+	protected $_hidden = FALSE;
+	
+	public function hidden($flag = FALSE){
+		$this->_hidden = (bool)$flag;
+		return $this;
+	}
+	
 	public function filters(){
 		return array(
 			'title' => array(
@@ -130,5 +137,47 @@ class Model_Node extends ORM_MP {
 	
 	public function unique_keywords($keywords){
 		return implode(', ', array_unique(array_map('UTF8::trim', explode(',', $keywords))));
+	}
+	
+	public function load_tree ($id = null) {
+		if ($id !== true && $this->tree_loaded) return $this;
+		$this->tree_loaded = true;
+
+		$cats = $this->_create();
+		if (is_callable($id)) {
+			$id($cats);
+		}
+		
+		//Добавил возможность не вытаскивать скрытые
+		if(!$this->_hidden){
+			$cats->where('hidden', '!=', 1);
+		}
+		//а дальше все старое
+		if ($this->path || $id) {
+			$path = $id ? "%.$id.%" : $this->path . '%';
+			$cats->where('path', 'like', $path);
+		}
+		$cats = $cats
+			->order_by('position')
+			->find_all();
+		
+		$levels = array();
+
+		foreach($cats as $cat) {
+			$L = $cat->level;
+
+			if (empty($levels[$L])) {
+				$levels[$L] = array();
+			}
+			$levels[$L][] = $cat;
+		}
+
+		ksort($levels);
+		foreach ($levels as $level) {
+			foreach ($level as $desc) {
+				$this->add_descendant($desc);
+			}
+		}
+		return $this;
 	}
 }

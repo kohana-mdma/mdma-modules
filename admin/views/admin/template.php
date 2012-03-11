@@ -76,7 +76,7 @@
                 <h2>Страницы</h2>
                 <section>
                 <?php
-				$nodes = ORM::factory('node')->load_tree();
+				$nodes = ORM::factory('node')->hidden(TRUE)->load_tree();
 				$render = function ($nodes, $render) {
 					$result = "";
 					foreach ($nodes->children as $node) {
@@ -88,7 +88,9 @@
 						}elseif($node->model_id){
 							$link = 'admin/'.$node->model.'/edit/'.$node->model_id;
 						}
-						$result  .= '<li id="node_'.$node->id.'" rel="'.$node->model.'.'.$node->type.'">'.HTML::anchor($link, $node->menu_title).$render($node, $render).'</li>';
+						$title = $node->menu_title;
+						if($node->hidden) $title = '<i class="hide">'.$title.'</i>';
+						$result  .= '<li id="node_'.$node->id.'" rel="'.$node->model.'.'.$node->type.'">'.HTML::anchor($link, $title).$render($node, $render).'</li>';
 					}
 					if($result) $result = '<ul>'.$result.'</ul>';
 					return $result;
